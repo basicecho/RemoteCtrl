@@ -225,6 +225,26 @@ void CServerSocket::CloseClient()
     m_client = INVALID_SOCKET;
 }
 
+BOOL CServerSocket::Send(const char* pData, int nSize)
+{
+    if (m_client == -1)
+    {
+        return FALSE;
+    }
+
+    return (send(m_client, pData, nSize, 0) > 0) ? TRUE : FALSE;
+}
+
+bool CServerSocket::Send(CPacket& pack)
+{
+    if (m_client == -1)
+    {
+        return FALSE;
+    }
+
+    return (send(m_client, pack.Data(), pack.Size(), 0) > 0) ? TRUE : FALSE;
+}
+
 CServerSocket::CServerSocket()
 {
     m_client = INVALID_SOCKET;

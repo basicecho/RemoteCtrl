@@ -36,6 +36,10 @@ public:
 	BOOL AcceptClient();
 	int DealCommand();
 	void CloseClient();
+	CPacket& GetPacket() { return m_packet; }
+
+	BOOL Send(const char* pData, int nSize);
+	bool Send(CPacket& pack);
 
 private:
 	CServerSocket();
